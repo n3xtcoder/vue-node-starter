@@ -1,6 +1,5 @@
 const uuid        = require('uuid')
 const faker       = require('faker')
-const elasticlunr = require('elasticlunr');
 
 const numCoders    = 10
 const numCompanies = 20
@@ -86,8 +85,5 @@ module.exports = {
     issues:    issues,
     companies: companies,
     coders:    coders,
-    idx:       idx,
-    getIssue:  (id) => issueLookup[id]
+    findById:  (id) => issueLookup[id]
 }
-
-// console.log(JSON.stringify(idx))
