@@ -30,5 +30,6 @@ module.exports = {
         // Allow a bit of freedom with spaces
         'key-spacing': 0,
         'space-before-function-paren': 0,
+        'space-in-parens': 0
     }
 }
