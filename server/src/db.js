@@ -7,6 +7,11 @@ const numCompanies = 20
 const numPeople    = 20
 const numIssues    = 5000
 
+const coders      = []
+const companies   = []
+const issues      = []
+const issueLookup = {}
+
 const randomPerson = () => {
     return {
         id:   uuid(),
@@ -14,10 +19,6 @@ const randomPerson = () => {
     }
 }
 
-const coders = []
-for ( n = 0; n < numCoders; n++ ) {
-    coders.push(randomPerson())
-}
 
 const randomCompany = () => {
     const people = []
@@ -32,12 +33,9 @@ const randomCompany = () => {
     }
 }
 
-const companies = []
-for ( n = 0; n < numCompanies; n++ ) {
-    companies.push(randomCompany())
-}
 
 const randomIssue = () => {
+
     const company = faker.random.arrayElement(companies)
 
     return {
@@ -53,15 +51,32 @@ const randomIssue = () => {
     }
 }
 
-const issues      = []
-const issueLookup = {}
-for ( n = 0; n < numIssues; n++ ) {
-    const issue = randomIssue()
-
-    issueLookup[issue.id] = issue
-    issues.push(issue)
+const bootstrapCoders    = () => {
+    for ( let n = 0; n < numCoders; n++ ) {
+        coders.push(randomPerson())
+    }
+}
+const bootstrapCompanies = () => {
+    for ( let n = 0; n < numCompanies; n++ ) {
+        companies.push(randomCompany())
+    }
 }
 
+const bootstrapIssues = () => {
+    for ( let n = 0; n < numIssues; n++ ) {
+        const issue = randomIssue()
+
+        issueLookup[issue.id] = issue
+        issues.push(issue)
+    }
+}
+
+const bootstrapDummyData = () => {
+    bootstrapCoders()
+    bootstrapCompanies()
+    bootstrapIssues()
+}
+process.env.DUMMY_DATA && bootstrapDummyData()
 
 var idx = elasticlunr(function () {
     this.addField('id')
@@ -75,13 +90,10 @@ var idx = elasticlunr(function () {
     this.addField('title')
 
     issues.forEach(function (doc) {
-        console.log("adding", doc.title)
         this.addDoc(doc)
     }, this)
 });
 
-
-console.log('*', idx.search(""))
 module.exports = {
     issues:   issues,
     index:    idx,
