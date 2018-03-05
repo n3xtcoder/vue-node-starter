@@ -1,5 +1,6 @@
 const uuid        = require('uuid')
 const faker       = require('faker')
+const elasticlunr = require('elasticlunr')
 
 const numCoders    = 10
 const numCompanies = 20
@@ -14,7 +15,7 @@ const randomPerson = () => {
 }
 
 const coders = []
-for ( n = 0; n <= numCoders; n++ ) {
+for ( n = 0; n < numCoders; n++ ) {
     coders.push(randomPerson())
 }
 
@@ -32,7 +33,7 @@ const randomCompany = () => {
 }
 
 const companies = []
-for ( n = 0; n <= numCompanies; n++ ) {
+for ( n = 0; n < numCompanies; n++ ) {
     companies.push(randomCompany())
 }
 
@@ -41,7 +42,7 @@ const randomIssue = () => {
 
     return {
         id:          uuid(),
-        client:      company,
+        client:      company.name,
         priority:    faker.random.number({ 'min': 1, 'max': 5 }),
         owner:       faker.random.arrayElement(company.people.map(p => p.name)),
         tester:      faker.random.arrayElement(coders.map(p => p.name)),
@@ -54,7 +55,7 @@ const randomIssue = () => {
 
 const issues      = []
 const issueLookup = {}
-for ( n = 0; n <= numIssues; n++ ) {
+for ( n = 0; n < numIssues; n++ ) {
     const issue = randomIssue()
 
     issueLookup[issue.id] = issue
@@ -82,8 +83,7 @@ var idx = elasticlunr(function () {
 
 console.log('*', idx.search(""))
 module.exports = {
-    issues:    issues,
-    companies: companies,
-    coders:    coders,
-    findById:  (id) => issueLookup[id]
+    issues:   issues,
+    index:    idx,
+    getIssue: (id) => issueLookup[id]
 }

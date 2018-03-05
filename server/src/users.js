@@ -15,7 +15,7 @@ const records = [
     },
 ];
 
-exports.findByUsername = function findByUsername(username, done) {
+exports.findByUsername = (username, done) => {
     process.nextTick(() => {
         for ( const i in records ) { // eslint-disable-line guard-for-in,no-restricted-syntax
             const item = records[i];
