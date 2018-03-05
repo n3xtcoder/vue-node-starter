@@ -1,4 +1,4 @@
-const { getIssue, index, issues } = require('./db')
+const { getIssue, index, issues } = require('./data')
 
 exports.searchIssues = (req, res) => {
     const offset    = parseInt(req.query.offset, 10) || 0
