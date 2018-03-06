@@ -15,3 +15,14 @@ export function auth(username, password) {
         return response.data.jwt
     })
 }
+
+export function issues(q = undefined, offset = 0, limit = 100) {
+    return axios({
+        method: 'get',
+        url:    `${BASE_URL}/issues`,
+        params: { q, offset, limit }
+    }).then((response) => {
+        console.log(response.data)
+        return response.data
+    })
+}
