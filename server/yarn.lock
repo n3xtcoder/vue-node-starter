@@ -497,7 +497,7 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-elasticlunr@0.9.5:
+elasticlunr@0.9.6:
   version "0.9.5"
   resolved "https://registry.yarnpkg.com/elasticlunr/-/elasticlunr-0.9.5.tgz#65541bb309dddd0cf94f2d1c8861b2be651bb0d5"
 
@@ -1292,6 +1292,10 @@ lru-cache@^4.0.1:
   dependencies:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
+
+lunr@dev-master:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/lunr/-/lunr-2.1.1.tgz#37f0814610dbc3623b71c31eb3befb9eac4ee5ce"
 
 media-typer@0.3.0:
   version "0.3.0"

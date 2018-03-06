@@ -2,7 +2,7 @@ const { getIssue, index, issues } = require('./data')
 
 exports.searchIssues = (req, res) => {
     const offset    = parseInt(req.query.offset, 10) || 0
-    const limit     = parseInt(req.query.limit, 10) || 10
+    const limit     = parseInt(req.query.limit, 10) || 100
     const q         = req.query.q || ''
 
     const opts = {
