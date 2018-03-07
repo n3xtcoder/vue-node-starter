@@ -23,7 +23,7 @@ POST /user *Authenticates the user and provides a JWT*
 Request body:
 ```
 { 
-  "username":"patient",
+  "username":"user",
   "password":"password"
 }
 ```
